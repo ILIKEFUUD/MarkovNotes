@@ -97,7 +97,7 @@ public class FunkRunnerWithGUIWow {
 
 					in.setText("Added file");
 
-				} catch (FileNotFoundException e1) {
+				} catch (Exception e1) {
 					in.setText("Could not add file");
 					e1.printStackTrace();
 				}
@@ -116,7 +116,10 @@ public class FunkRunnerWithGUIWow {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ArrayList<Double> song = chain.getValuesOfSong(100);
+				
+				double averageTime = 0;
+				
+				ArrayList<Double> song = chain.getValuesOfSong(200);
 
 				ArrayList<Integer> values = new ArrayList<Integer>();
 				ArrayList<Double> times = new ArrayList<Double>();
@@ -207,12 +210,20 @@ public class FunkRunnerWithGUIWow {
 					} else if (times.get(x) == 0.5) {
 						playString += notes.get(x) + "h ";
 					} else if (times.get(x) == 0) {
-						playString += notes.get(x) +"o ";
+						playString += notes.get(x) +"i ";
 					} else {
 						playString += "R ";
 					}
+					
+					averageTime+=times.get(x);
 				}
-
+				
+				averageTime = Math.abs(averageTime/times.size());
+				
+				System.out.println(averageTime);
+				int tempo = (int) (9.3/averageTime);
+				playString = "T"+tempo+" "+ playString;
+				
 				player.play(playString);
 
 			}

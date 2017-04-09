@@ -111,7 +111,7 @@ public class FunkRunnerWithGUIWOO {
 				// }
 
 				ArrayList<Character> notes = new ArrayList<Character>();
-				for (int x = 0; x < 100; x++) {
+				for (int x = 0; x < 200; x++) {
 					int i = (int) ((71 - 65 + 1) * Math.random() + 65);
 					char c = (char) i;
 					notes.add(c);
@@ -119,11 +119,36 @@ public class FunkRunnerWithGUIWOO {
 
 				Player player = new Player();
 				String playString = "";
+				
+				int tempo = (int)(121*Math.random()+60);
+				
+				playString+="T"+tempo+" ";
 
 				for (Character c : notes) {
-					String str = ""+c;
 					int n = (int) (10 * Math.random());
-					playString += str + n + " ";
+					int length = (int)(5*Math.random());
+
+					int sharp = (int)(2*Math.random());
+					
+					playString+=c;
+					
+					if(sharp==0 && c!='B' && c!='E')
+						playString+="#";
+					
+						
+					
+					if (length ==5)
+						playString +=n + "w ";
+					else if(length == 4)
+						playString +=n +"h ";
+					else if(length == 3)
+						playString +=n +"q ";
+					else if (length == 2)
+						playString +=n +"i ";
+					else{
+						playString = playString.substring(0, playString.length()-1) +"R ";
+					}
+				
 				}
 				System.out.println(playString);
 				player.play(playString);
@@ -135,12 +160,10 @@ public class FunkRunnerWithGUIWOO {
 		ImageIcon image = new ImageIcon("/Users/TauCeti/Desktop/UMD_Markov_Notes/TheFunkEngineGraphic.jpg");
 		JLabel l = new JLabel("", image, JLabel.CENTER);
 		JPanel BEAR = new JPanel(new BorderLayout());
-		BEAR.add(l, BorderLayout.CENTER );
+		BEAR.add(l, BorderLayout.CENTER);
 
 		f.add(panel, BorderLayout.SOUTH);
 		f.add(BEAR, BorderLayout.NORTH);
-		
-		f.add(panel);
 
 		f.setVisible(true);// TODO Auto-generated method stub
 
