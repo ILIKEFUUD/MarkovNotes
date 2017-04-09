@@ -23,6 +23,7 @@ public class FunkRunnerWithGUIWow {
 		MarkovChain chain = new MarkovChain();
 
 		JFrame f = new JFrame("Funk Runner");
+		f.setLayout(new BorderLayout());
 
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f.setSize(600, 600);
@@ -217,8 +218,14 @@ public class FunkRunnerWithGUIWow {
 			}
 
 		});
+		
+		ImageIcon image = new ImageIcon("/Users/TauCeti/Desktop/UMD_Markov_Notes/TheFunkEngineGraphic.jpg");
+		JLabel l = new JLabel("", image, JLabel.CENTER);
+		JPanel BEAR = new JPanel(new BorderLayout());
+		BEAR.add(l, BorderLayout.CENTER );
 
-		f.add(panel);
+		f.add(panel, BorderLayout.SOUTH);
+		f.add(BEAR, BorderLayout.NORTH);
 
 		f.setVisible(true);
 	}
